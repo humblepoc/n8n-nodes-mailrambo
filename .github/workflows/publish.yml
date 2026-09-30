@@ -1,0 +1,45 @@
+# Publishes n8n-nodes-mailrambo to npm with a provenance statement when a
+# version tag (e.g. 0.1.1) is pushed. n8n requires provenance for verified
+# community nodes (since May 1 2026).
+#
+# Auth: npm Trusted Publishing (OIDC). On npmjs.com the package has a Trusted
+# Publisher for humblepoc/n8n-nodes-mailrambo, workflow "publish.yml", so no
+# NPM_TOKEN secret is needed.
+
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      # Trusted publishing needs npm >= 11.5.1.
+      - run: npm install -g npm@latest
+
+      - run: npm ci
+
+      - name: Tag must match package.json version
+        run: |
+          test "$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
+
+      - run: npm run lint
+      - run: npm run build
+      - run: npm test
+
+      - run: npm publish --provenance --access public

@@ -1,0 +1,10 @@
+{
+	"node": "n8n-nodes-mailrambo.mailRambo",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing", "Sales", "Data & Storage"],
+	"resources": {
+		"credentialDocumentation": [{ "url": "https://www.mailrambo.com/developers#authentication" }],
+		"primaryDocumentation": [{ "url": "https://www.mailrambo.com/developers" }]
+	}
+}

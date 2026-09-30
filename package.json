@@ -1,0 +1,59 @@
+{
+  "name": "n8n-nodes-mailrambo",
+  "version": "0.1.1",
+  "description": "n8n node for MailRambo: strict yes/no email verification with reason codes (disposable, catch-all, mailbox not found) for lead lists and signups.",
+  "keywords": [
+    "n8n-community-node-package",
+    "email verification",
+    "email validation",
+    "disposable email",
+    "catch-all",
+    "lead cleaning",
+    "mailrambo"
+  ],
+  "license": "MIT",
+  "homepage": "https://www.mailrambo.com/developers",
+  "author": {
+    "name": "iodevz",
+    "email": "hello@mailrambo.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humblepoc/n8n-nodes-mailrambo.git"
+  },
+  "engines": {
+    "node": ">=20.15"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "n8n-node build",
+    "build:watch": "tsc --watch",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "test": "node --test test/node.test.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/MailRamboApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/MailRambo/MailRambo.node.js"
+    ],
+    "strict": true
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "*",
+    "eslint": "9.39.4",
+    "prettier": "3.8.3",
+    "typescript": "5.9.3",
+    "n8n-workflow": "*"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
